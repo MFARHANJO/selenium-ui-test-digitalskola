@@ -26,7 +26,10 @@ describe("Checkout Test", function () {
     await loginPage.login(testData.validUser.username, testData.validUser.password);
     await inventoryPage.addItemToCart();
     await driver.wait(until.elementLocated(By.className("shopping_cart_badge")), 5000);
-    await inventoryPage.openCart();
+    
+    await inventoryPage.openCart(); // 🔥 Panggil openCart() sebelum checkout
+    await takeScreenshot(driver, "cart_before_checkout.png");
+
     await cartPage.proceedToCheckout();
   });
 

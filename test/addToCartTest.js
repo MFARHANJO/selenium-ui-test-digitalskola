@@ -5,7 +5,7 @@ const testData = require("../fixtures/testData.json");
 const { takeScreenshot } = require("../helper/visualTesting");
 
 describe("Add to Cart Test", function () {
-  this.timeout(15000);
+  this.timeout(10000);
 
   let driver;
   let loginPage;
@@ -26,7 +26,7 @@ describe("Add to Cart Test", function () {
     await driver.wait(until.elementLocated(By.className("shopping_cart_badge")), 5000);
     await takeScreenshot(driver, "add_to_cart.png");
 
-    await inventoryPage.openCart(); // Klik ikon keranjang di kanan atas
+    await inventoryPage.openCart(); // 🔥 Panggil openCart() untuk membuka keranjang
     await takeScreenshot(driver, "cart_page.png");
   });
 
