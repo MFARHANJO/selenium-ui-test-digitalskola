@@ -3,13 +3,11 @@ const { By } = require("selenium-webdriver");
 class InventoryPage {
   constructor(driver) {
     this.driver = driver;
-    this.itemName = By.className("inventory_item_name");
     this.addToCartButton = By.className("btn_inventory");
     this.cartIcon = By.className("shopping_cart_badge");
   }
 
   async addItemToCart() {
-    await this.driver.findElement(this.itemName).click();
     await this.driver.findElement(this.addToCartButton).click();
   }
 
