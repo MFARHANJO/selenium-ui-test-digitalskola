@@ -7,7 +7,7 @@ const testData = require("../fixtures/testData.json");
 const { takeScreenshot } = require("../helper/visualTesting");
 
 describe("Checkout Test", function () {
-  this.timeout(20000); // ⏳ Perpanjang timeout jadi 20 detik
+  this.timeout(20000); 
 
   let driver;
   let loginPage;
@@ -25,26 +25,26 @@ describe("Checkout Test", function () {
     await loginPage.open(testData.baseUrl);
     await loginPage.login(testData.validUser.username, testData.validUser.password);
 
-    // 🔥 Tambahkan item ke cart dan tunggu ikon cart muncul
+    // menambahkan item ke cart dan tunggu ikon cart muncul
     await inventoryPage.addItemToCart();
     await driver.wait(until.elementLocated(By.className("shopping_cart_badge")), 10000);
     await takeScreenshot(driver, "cart_with_items.png");
 
-    // 🔥 Buka cart sebelum checkout
+    // membuka cart sebelum checkout
     await inventoryPage.openCart();
     await takeScreenshot(driver, "cart_before_checkout.png");
 
-    // 🔥 Tunggu tombol "Checkout" muncul sebelum klik
+    // menunggu tombol "Checkout" muncul sebelum klik
     await driver.wait(until.elementLocated(By.id("checkout")), 10000);
     await cartPage.proceedToCheckout();
   });
-
+    // mengisi data diri
   it("Complete checkout process", async function () {
-    await driver.wait(until.elementLocated(By.id("first-name")), 10000); // 🔥 Tunggu form checkout muncul
+    await driver.wait(until.elementLocated(By.id("first-name")), 10000); // Tunggu form checkout muncul
     await checkoutPage.enterCheckoutInfo("Farhan", "Jundi", "44151");
     await takeScreenshot(driver, "checkout_info.png");
 
-    await driver.wait(until.elementLocated(By.id("finish")), 10000); // 🔥 Tunggu tombol "Finish"
+    await driver.wait(until.elementLocated(By.id("finish")), 10000); // Tunggu tombol "Finish"
     await checkoutPage.finishCheckout();
     await takeScreenshot(driver, "checkout_success.png");
   });
