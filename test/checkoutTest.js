@@ -1,4 +1,4 @@
-const { Builder } = require("selenium-webdriver");
+const { Builder, By, until } = require("selenium-webdriver");
 const LoginPage = require("../pages/loginPage");
 const InventoryPage = require("../pages/inventoryPage");
 const CartPage = require("../pages/cartPage");
@@ -8,6 +8,7 @@ const { takeScreenshot } = require("../helper/visualTesting");
 
 describe("Checkout Test", function () {
   this.timeout(15000);
+
   let driver;
   let loginPage;
   let inventoryPage;
@@ -20,14 +21,20 @@ describe("Checkout Test", function () {
     inventoryPage = new InventoryPage(driver);
     cartPage = new CartPage(driver);
     checkoutPage = new CheckoutPage(driver);
+
     await loginPage.open(testData.baseUrl);
     await loginPage.login(testData.validUser.username, testData.validUser.password);
     await inventoryPage.addItemToCart();
+    await driver.wait(until.elementLocated(By.className("shopping_cart_badge")), 5000);
+    await inventoryPage.openCart();
     await cartPage.proceedToCheckout();
   });
 
   it("Complete checkout process", async function () {
-    await checkoutPage.enterCheckoutInfo("John", "Doe", "12345");
+    await driver.wait(until.elementLocated(By.id("checkout")), 5000);
+    await checkoutPage.enterCheckoutInfo("Farhan", "Jundi", "44151");
+    await takeScreenshot(driver, "checkout_info.png");
+
     await checkoutPage.finishCheckout();
     await takeScreenshot(driver, "checkout_success.png");
   });
