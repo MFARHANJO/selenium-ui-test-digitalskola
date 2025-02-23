@@ -8,6 +8,10 @@ class LoginPage {
     this.loginButton = By.id("login-button");
   }
 
+  async open(url) {
+    await this.driver.get(url);
+  }
+
   async login(username, password) {
     await this.driver.findElement(this.usernameInput).sendKeys(username);
     await this.driver.findElement(this.passwordInput).sendKeys(password);
