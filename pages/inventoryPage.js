@@ -4,15 +4,15 @@ class InventoryPage {
   constructor(driver) {
     this.driver = driver;
     this.addToCartButton = By.className("btn_inventory");
-    this.cartIcon = By.className("shopping_cart_badge");
+    this.cartIcon = By.className("shopping_cart_link"); // Ikon cart di kanan atas
   }
 
   async addItemToCart() {
     await this.driver.findElement(this.addToCartButton).click();
   }
 
-  async getCartItemCount() {
-    return await this.driver.findElement(this.cartIcon).getText();
+  async openCart() {
+    await this.driver.findElement(this.cartIcon).click(); // Klik ikon cart
   }
 }
 
