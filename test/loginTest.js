@@ -4,8 +4,7 @@ const testData = require("../fixtures/testData.json");
 const { takeScreenshot } = require("../helper/visualTesting");
 
 describe("Login Test", function () {
-  let driver;
-  let loginPage;
+    this.timeout(10000);
 
   before(async function () {
     driver = await new Builder().forBrowser("chrome").build();

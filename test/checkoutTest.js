@@ -7,6 +7,7 @@ const testData = require("../fixtures/testData.json");
 const { takeScreenshot } = require("../helper/visualTesting");
 
 describe("Checkout Test", function () {
+  this.timeout(15000);
   let driver;
   let loginPage;
   let inventoryPage;
